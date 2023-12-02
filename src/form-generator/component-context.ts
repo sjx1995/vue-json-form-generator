@@ -3,6 +3,7 @@
  * @Author: Sunly
  * @Date: 2023-11-30 03:20:01
  */
+import { reactive } from "vue";
 import type { IButtonProp } from "./components/form-button.vue";
 import type { IFormJSON } from "./reduce-component";
 
@@ -20,15 +21,14 @@ type ISetReactiveData = (
   value: IFormValueTypeExcludeButton
 ) => void;
 
-const reactiveData: IReactiveData = {};
+const reactiveData = reactive<IReactiveData>({});
 
 const setReactiveData: ISetReactiveData = (key, value) => {
   reactiveData[key] = value;
 };
 
 const getReactData = (): IReactiveData => {
-  // todo 处理一下data
   return reactiveData;
 };
 
-export { setReactiveData, getReactData, type IReactiveData };
+export { getReactData, setReactiveData, type IReactiveData };

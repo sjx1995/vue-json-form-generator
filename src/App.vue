@@ -20,6 +20,20 @@ const formJSON: IFormJSON = {
     label: "密码",
     defaultValue: "bar",
     type: "password",
+    rules: [
+      {
+        type: "string",
+        required: true,
+        message: "Please input Activity name",
+        trigger: "blur",
+      },
+      {
+        min: 3,
+        max: 5,
+        message: "Length should be 3 to 5",
+        trigger: ["change", "blur"],
+      },
+    ],
   },
   gender: {
     componentType: "select",

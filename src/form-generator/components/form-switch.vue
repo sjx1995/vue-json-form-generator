@@ -5,10 +5,9 @@
 -->
 <script lang="ts" setup>
 import { ElSwitch, type SwitchProps } from "element-plus";
-import { ref } from "vue";
-import { setReactiveData } from "../component-context";
+import { getReactData } from "../component-context";
 import type { IComponentExtraPropType } from "../reduce-component";
-import FormItem from "./form-item.vue";
+import FormItem, { type IFormItemRule } from "./form-item.vue";
 
 export type ISwitchProp = {
   // 自定义属性
@@ -19,19 +18,23 @@ export type ISwitchProp = {
   disabled?: SwitchProps["disabled"];
   loading?: SwitchProps["loading"];
   size?: SwitchProps["size"];
+  rules?: IFormItemRule;
 };
 
 const props = defineProps<ISwitchProp & IComponentExtraPropType>();
 
-const value = ref(props.defaultValue);
-const handleChange = (val: SwitchProps["modelValue"]) => {
-  value.value = val;
-  setReactiveData(props.__name, val);
-};
+const reactiveData = getReactData() as Record<
+  string,
+  SwitchProps["modelValue"]
+>;
 </script>
 
 <template>
-  <FormItem :label="props.label">
-    <el-switch :model-value="value" @change="handleChange" />
+  <FormItem
+    :label="props.label"
+    :rules-name="props.__name"
+    :rules="props.rules"
+  >
+    <el-switch v-model:model-value="reactiveData[props.__name]" />
   </FormItem>
 </template>

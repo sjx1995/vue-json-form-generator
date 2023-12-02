@@ -5,10 +5,9 @@
 -->
 <script lang="ts" setup>
 import { ElOption, ElSelect } from "element-plus";
-import { ref } from "vue";
-import { setReactiveData } from "../component-context";
 import type { IComponentExtraPropType } from "../reduce-component";
-import FormItem from "./form-item.vue";
+import FormItem, { type IFormItemRule } from "./form-item.vue";
+import { getReactData } from "../component-context";
 
 export type ISelectProp = {
   // 自定义属性
@@ -16,20 +15,18 @@ export type ISelectProp = {
   label: string;
   defaultValue: string | number;
   options: { label: string; value: string | number }[];
+  // Element-plus Select 属性
+  rules?: IFormItemRule;
 };
 
 const props = defineProps<ISelectProp & IComponentExtraPropType>();
 
-const value = ref(props.defaultValue);
-const handleChange = (val: string | number) => {
-  value.value = val;
-  setReactiveData(props.__name, val);
-};
+const reactiveData = getReactData() as Record<string, string | number>;
 </script>
 
 <template>
   <FormItem :label="props.label">
-    <ElSelect :model-value="value" @change="handleChange">
+    <ElSelect v-model:model-value="reactiveData[props.__name]">
       <ElOption
         v-for="item of props.options"
         :key="item.value"
