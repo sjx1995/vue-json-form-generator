@@ -75,6 +75,28 @@ importers:
         specifier: ^1.8.24
         version: 1.8.24(typescript@5.3.2)
 
+  playground:
+    dependencies:
+      '@vue/repl':
+        specifier: ^3.0.0
+        version: 3.0.0
+      vue:
+        specifier: ^3.3.4
+        version: 3.3.9(typescript@5.3.2)
+    devDependencies:
+      '@vitejs/plugin-vue':
+        specifier: ^4.2.3
+        version: 4.5.1(vite@4.5.0)(vue@3.3.9)
+      typescript:
+        specifier: ^5.0.2
+        version: 5.3.2
+      vite:
+        specifier: ^4.4.5
+        version: 4.5.0
+      vue-tsc:
+        specifier: ^1.8.5
+        version: 1.8.24(typescript@5.3.2)
+
 packages:
 
   /@aashutoshrathi/word-wrap@1.2.6:
@@ -678,7 +700,7 @@ packages:
       vite: ^4.0.0 || ^5.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.5.0(@types/node@20.10.2)
+      vite: 4.5.0
       vue: 3.3.9(typescript@5.3.2)
     dev: true
 
@@ -768,6 +790,10 @@ packages:
     resolution: {integrity: sha512-VmpIqlNp+aYDg2X0xQhJqHx9YguOmz2UxuUJDckBdQCNkipJvfk9yA75woLWElCa0Jtyec3lAAt49GO0izsphw==}
     dependencies:
       '@vue/shared': 3.3.9
+
+  /@vue/repl@3.0.0:
+    resolution: {integrity: sha512-tGYibiftMo5yEuIKPWVsNuuNDejjJk0JQmvKtTm12KNLFqtGD7fWoGv1qUzcN9EAxwVeDgnT9ljRgqGVgZkyEg==}
+    dev: false
 
   /@vue/runtime-core@3.3.9:
     resolution: {integrity: sha512-xxaG9KvPm3GTRuM4ZyU8Tc+pMVzcu6eeoSRQJ9IE7NmCcClW6z4B3Ij6L4EDl80sxe/arTtQ6YmgiO4UZqRc+w==}
@@ -1865,6 +1891,41 @@ packages:
       - '@types/node'
       - rollup
       - supports-color
+    dev: true
+
+  /vite@4.5.0:
+    resolution: {integrity: sha512-ulr8rNLA6rkyFAlVWw2q5YJ91v098AFQ2R0PRFwPzREXOUJQPtFUG0t+/ZikhaOCDqFoDhN6/v8Sq0o4araFAw==}
+    engines: {node: ^14.18.0 || >=16.0.0}
+    hasBin: true
+    peerDependencies:
+      '@types/node': '>= 14'
+      less: '*'
+      lightningcss: ^1.21.0
+      sass: '*'
+      stylus: '*'
+      sugarss: '*'
+      terser: ^5.4.0
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      less:
+        optional: true
+      lightningcss:
+        optional: true
+      sass:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
+        optional: true
+    dependencies:
+      esbuild: 0.18.20
+      postcss: 8.4.32
+      rollup: 3.29.4
+    optionalDependencies:
+      fsevents: 2.3.3
     dev: true
 
   /vite@4.5.0(@types/node@20.10.2):
