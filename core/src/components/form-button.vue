@@ -4,11 +4,13 @@
  * @Date: 2023-11-30 05:33:37
 -->
 <script lang="ts" setup>
-import { ElButton, type ButtonProps } from "element-plus";
+import { ElButton } from "element-plus";
 import { h } from "vue";
-import type { IReactiveData } from "../component-context";
 import { getReactData } from "../component-context";
 import FormItem from "./form-item.vue";
+// import { IButtonProp } from "./form-button";
+import type { ButtonProps } from "element-plus";
+import type { IReactiveData } from "../component-context";
 
 export type IButtonProp = {
   // 自定义属性

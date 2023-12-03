@@ -1,12 +1,10 @@
 <!--
- * @Description: 
+ * @Description: App
  * @Author: Sunly
  * @Date: 2023-11-29 07:13:28
 -->
 <script setup lang="ts">
-import FormComponent, {
-  type IFormJSON,
-} from "./form-generator/form-component.vue";
+import { type IFormJSON } from "@packages/generator";
 
 const formJSON: IFormJSON = {
   username: {

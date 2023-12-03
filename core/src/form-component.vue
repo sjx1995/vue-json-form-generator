@@ -8,8 +8,6 @@ import { ElForm } from "element-plus";
 import { getReactData } from "./component-context";
 import { reduceComponent, type IFormJSON } from "./reduce-component";
 
-export type { IFormJSON };
-
 const props = defineProps<{
   form: IFormJSON;
 }>();

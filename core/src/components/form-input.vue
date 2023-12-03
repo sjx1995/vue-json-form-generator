@@ -5,7 +5,8 @@
 -->
 <script lang="ts" setup>
 import { ElInput, type InputProps } from "element-plus";
-import { watch, type InputTypeHTMLAttribute } from "vue";
+import type { InputTypeHTMLAttribute } from "vue";
+import { watch } from "vue";
 import { getReactData } from "../component-context";
 import type { IComponentExtraPropType } from "../reduce-component";
 import FormItem, { type IFormItemRule } from "./form-item.vue";

@@ -8,7 +8,7 @@ import { setReactiveData } from "./component-context";
 import FormButton, { type IButtonProp } from "./components/form-button.vue";
 import FormInput, { type IInputProp } from "./components/form-input.vue";
 import FormSelect, { type ISelectProp } from "./components/form-select.vue";
-import FormSwitch, { ISwitchProp } from "./components/form-switch.vue";
+import FormSwitch, { type ISwitchProp } from "./components/form-switch.vue";
 
 type IComponentExtraPropType = {
   __name: string;

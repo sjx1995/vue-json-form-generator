@@ -1,0 +1,13 @@
+{
+  "name": "@packages/generator",
+  "version": "1.0.0",
+  "description": "Vue JSON Form Generator Source Code",
+  "main": "./src/index.ts",
+  "module": "./src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

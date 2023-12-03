@@ -4,12 +4,12 @@
  * @Date: 2023-11-30 03:04:52
 -->
 <script lang="ts" setup>
-import { type FormItemRule, ElFormItem } from "element-plus";
+import { ElFormItem, type FormItemRule } from "element-plus";
 import type { Arrayable } from "element-plus/lib/utils/index.js";
 
 export type IFormItemRule = Arrayable<FormItemRule>;
 
-type IFromItem = {
+export type IFromItem = {
   label: string;
   rulesName?: string;
   rules?: IFormItemRule;

@@ -5,9 +5,9 @@
 -->
 <script lang="ts" setup>
 import { ElOption, ElSelect } from "element-plus";
+import { getReactData } from "../component-context";
 import type { IComponentExtraPropType } from "../reduce-component";
 import FormItem, { type IFormItemRule } from "./form-item.vue";
-import { getReactData } from "../component-context";
 
 export type ISelectProp = {
   // 自定义属性
