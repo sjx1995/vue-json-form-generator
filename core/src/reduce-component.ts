@@ -51,6 +51,10 @@ function reduceComponent(json: IFormJSON) {
 }
 
 export {
+  FormButton,
+  FormInput,
+  FormSelect,
+  FormSwitch,
   reduceComponent,
   type IButtonProp,
   type IComponentExtraPropType,

@@ -6,12 +6,17 @@
 import type { App } from "vue";
 import FormComponent from "./form-component.vue";
 
-export type {
-  IButtonProp,
-  IFormJSON,
-  IInputProp,
-  ISelectProp,
-  ISwitchProp,
+export {
+  FormButton,
+  FormInput,
+  FormSelect,
+  FormSwitch,
+  type IButtonProp,
+  type IComponentExtraPropType,
+  type IFormJSON,
+  type IInputProp,
+  type ISelectProp,
+  type ISwitchProp,
 } from "./reduce-component";
 
 export default {
