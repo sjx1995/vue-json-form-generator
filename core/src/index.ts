@@ -6,7 +6,13 @@
 import type { App } from "vue";
 import FormComponent from "./form-component.vue";
 
-export { type IFormJSON } from "./reduce-component";
+export type {
+  IButtonProp,
+  IFormJSON,
+  IInputProp,
+  ISelectProp,
+  ISwitchProp,
+} from "./reduce-component";
 
 export default {
   install(app: App) {

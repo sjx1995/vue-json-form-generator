@@ -50,4 +50,12 @@ function reduceComponent(json: IFormJSON) {
   return h(Fragment, null, componentList);
 }
 
-export { reduceComponent, type IComponentExtraPropType, type IFormJSON };
+export {
+  reduceComponent,
+  type IButtonProp,
+  type IComponentExtraPropType,
+  type IFormJSON,
+  type IInputProp,
+  type ISelectProp,
+  type ISwitchProp,
+};
