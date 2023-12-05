@@ -6,17 +6,17 @@
 <script lang="ts" setup>
 import { ElInput, type InputProps } from "element-plus";
 import type { InputTypeHTMLAttribute } from "vue";
-import { watch } from "vue";
-import { getReactData } from "../component-context";
-import type { IComponentExtraPropType } from "../reduce-component";
+import { computed, watch } from "vue";
 import FormItem, { type IFormItemRule } from "./form-item.vue";
 
 export type IInputProp = {
   // 自定义属性
+  __name: string;
   componentType: "input";
-  label: string;
-  defaultValue: InputProps["modelValue"];
+  label?: string;
+  value: InputProps["modelValue"];
   // Element-plus Input 属性
+  disabled?: InputProps["disabled"];
   type: InputTypeHTMLAttribute;
   maxlength?: number;
   minlength?: number;
@@ -25,7 +25,10 @@ export type IInputProp = {
   rules?: IFormItemRule;
 };
 
-const props = defineProps<IInputProp & IComponentExtraPropType>();
+const props = defineProps<IInputProp>();
+const emits = defineEmits<{
+  (event: "update:modelValue", val: InputProps["modelValue"]): void;
+}>();
 
 // maxlength 和 minlength 的校验
 watch(
@@ -50,18 +53,26 @@ watch(
   }
 );
 
-const reactiveData = getReactData() as Record<string, InputProps["modelValue"]>;
+const value = computed({
+  get() {
+    return props.value;
+  },
+  set(val) {
+    emits("update:modelValue", val);
+  },
+});
 </script>
 
 <template>
   <FormItem :label="props.label" :rules-name="props.__name" :rules="rules">
     <ElInput
-      v-model:model-value="reactiveData[props.__name]"
+      v-model:model-value="value"
       :type="props.type"
       :maxlength="props.maxlength"
       :minlength="props.minlength"
+      :disabled="props.disabled"
       :show-word-limit="props.showWordLimit"
-      :placeholder="placeholder || `请输入${props.label}`"
+      :placeholder="placeholder || `请输入${props.label || ''}`"
     />
   </FormItem>
 </template>

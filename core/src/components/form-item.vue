@@ -10,7 +10,7 @@ import type { Arrayable } from "element-plus/lib/utils/index.js";
 export type IFormItemRule = Arrayable<FormItemRule>;
 
 export type IFromItem = {
-  label: string;
+  label?: string;
   rulesName?: string;
   rules?: IFormItemRule;
 };

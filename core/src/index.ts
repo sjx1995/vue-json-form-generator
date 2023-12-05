@@ -11,12 +11,11 @@ export {
   FormInput,
   FormSelect,
   FormSwitch,
-  type IButtonProp,
-  type IComponentExtraPropType,
+  type IButton,
   type IFormJSON,
-  type IInputProp,
-  type ISelectProp,
-  type ISwitchProp,
+  type IInput,
+  type ISelect,
+  type ISwitch,
 } from "./reduce-component";
 
 export default {

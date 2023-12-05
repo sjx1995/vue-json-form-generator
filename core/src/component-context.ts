@@ -5,30 +5,31 @@
  */
 import { reactive } from "vue";
 import type { IButtonProp } from "./components/form-button.vue";
-import type { IFormJSON } from "./reduce-component";
+import type { IInputProp } from "./components/form-input.vue";
+import type { ISelectProp } from "./components/form-select.vue";
+import type { ISwitchProp } from "./components/form-switch.vue";
 
-type IFormValueTypeExcludeButton = Exclude<
-  IFormJSON[string],
-  IButtonProp
->["defaultValue"];
+type IComponentProp = IButtonProp | IInputProp | ISelectProp | ISwitchProp;
 
 type IReactiveData = {
-  [key: string]: IFormValueTypeExcludeButton;
+  [key: string]: IComponentProp;
 };
 
-type ISetReactiveData = (
+type ICreateReactiveData = (
   key: string,
-  value: IFormValueTypeExcludeButton
-) => void;
+  value: IReactiveData[string]
+) => IComponentProp;
 
 const reactiveData = reactive<IReactiveData>({});
 
-const setReactiveData: ISetReactiveData = (key, value) => {
-  reactiveData[key] = value;
+const createReactiveData: ICreateReactiveData = (key, value) => {
+  const data = reactive(value);
+  reactiveData[key] = data;
+  return data;
 };
 
 const getReactData = (): IReactiveData => {
   return reactiveData;
 };
 
-export { getReactData, setReactiveData, type IReactiveData };
+export { createReactiveData, getReactData, type IReactiveData };

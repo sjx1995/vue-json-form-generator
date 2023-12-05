@@ -5,15 +5,15 @@
 -->
 <script lang="ts" setup>
 import { ElSwitch, type SwitchProps } from "element-plus";
-import { getReactData } from "../component-context";
-import type { IComponentExtraPropType } from "../reduce-component";
 import FormItem, { type IFormItemRule } from "./form-item.vue";
+import { computed } from "vue";
 
 export type ISwitchProp = {
   // 自定义属性
+  __name: string;
   componentType: "switch";
-  label: string;
-  defaultValue: SwitchProps["modelValue"];
+  label?: string;
+  value: SwitchProps["modelValue"];
   // Element-plus Button 属性
   disabled?: SwitchProps["disabled"];
   loading?: SwitchProps["loading"];
@@ -21,12 +21,19 @@ export type ISwitchProp = {
   rules?: IFormItemRule;
 };
 
-const props = defineProps<ISwitchProp & IComponentExtraPropType>();
+const props = defineProps<ISwitchProp>();
+const emits = defineEmits<{
+  (event: "update:modelValue", val: SwitchProps["modelValue"]): void;
+}>();
 
-const reactiveData = getReactData() as Record<
-  string,
-  SwitchProps["modelValue"]
->;
+const value = computed({
+  get() {
+    return props.value;
+  },
+  set(val) {
+    emits("update:modelValue", val);
+  },
+});
 </script>
 
 <template>
@@ -35,6 +42,11 @@ const reactiveData = getReactData() as Record<
     :rules-name="props.__name"
     :rules="props.rules"
   >
-    <el-switch v-model:model-value="reactiveData[props.__name]" />
+    <el-switch
+      v-model:model-value="value"
+      :disabled="props.disabled"
+      :size="props.size"
+      :loading="props.loading"
+    />
   </FormItem>
 </template>

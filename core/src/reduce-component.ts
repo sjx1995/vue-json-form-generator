@@ -3,24 +3,25 @@
  * @Author: Sunly
  * @Date: 2023-11-30 05:57:37
  */
-import { Component, Fragment, h } from "vue";
-import { setReactiveData } from "./component-context";
+import { Component, VNode, h } from "vue";
+import { createReactiveData } from "./component-context";
 import FormButton, { type IButtonProp } from "./components/form-button.vue";
 import FormInput, { type IInputProp } from "./components/form-input.vue";
 import FormSelect, { type ISelectProp } from "./components/form-select.vue";
 import FormSwitch, { type ISwitchProp } from "./components/form-switch.vue";
 
-type IComponentExtraPropType = {
-  __name: string;
-};
+type IButton = IButtonProp;
+type IInput = Omit<IInputProp, "__name">;
+type ISelect = Omit<ISelectProp, "__name">;
+type ISwitch = Omit<ISwitchProp, "__name">;
+
+type IFormComponentProp = IInputProp | ISelectProp | ISwitchProp;
 
 type IFormJSON = {
-  [key: string]: IInputProp | IButtonProp | ISelectProp | ISwitchProp;
+  [key: string]: IButton | IInput | ISelect | ISwitch;
 };
 
-const getComponent = (
-  name: Exclude<IFormJSON[string], IButtonProp>["componentType"]
-): Component => {
+const getComponent = (name: IFormComponentProp["componentType"]): Component => {
   return {
     input: FormInput,
     select: FormSelect,
@@ -29,25 +30,47 @@ const getComponent = (
 };
 
 function reduceComponent(json: IFormJSON) {
-  const componentList = [];
+  const componentList = [] as { render(): VNode }[];
 
   for (const key in json) {
     const component = json[key];
     const type = component.componentType;
 
-    // 设置默认值
     if (type !== "button") {
-      setReactiveData(key, component.defaultValue);
-    }
+      const props: IFormComponentProp = {
+        ...component,
+        __name: key,
+      };
+      const data = createReactiveData(key, props) as IFormComponentProp;
 
-    // ? 需要支持嵌套吗
-    if (type === "button") {
-      componentList.push(h(FormButton, component));
+      const updateModelValue = (value: IFormComponentProp["value"]) => {
+        data.value = value;
+      };
+
+      componentList.push({
+        render() {
+          return h(getComponent(type), {
+            ...data,
+            modelValue: data.value,
+            "onUpdate:modelValue": updateModelValue,
+          });
+        },
+      });
     } else {
-      componentList.push(h(getComponent(type), { ...component, __name: key }));
+      const props: IButtonProp = {
+        ...component,
+      };
+
+      const data = createReactiveData(key, props) as IButtonProp;
+
+      componentList.push({
+        render() {
+          return h(FormButton, { ...data });
+        },
+      });
     }
   }
-  return h(Fragment, null, componentList);
+  return componentList;
 }
 
 export {
@@ -56,10 +79,10 @@ export {
   FormSelect,
   FormSwitch,
   reduceComponent,
-  type IButtonProp,
-  type IComponentExtraPropType,
+  type IButton,
   type IFormJSON,
-  type IInputProp,
-  type ISelectProp,
-  type ISwitchProp,
+  type IInput,
+  type ISelect,
+  type ISwitch,
+  type IFormComponentProp,
 };
