@@ -18,6 +18,8 @@ export {
   type ISwitch,
 } from "./reduce-component";
 
+export type { IFromValue } from "./component-context";
+
 export default {
   install(app: App) {
     app.component("FormComponent", FormComponent);

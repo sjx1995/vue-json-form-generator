@@ -32,4 +32,25 @@ const getReactData = (): IReactiveData => {
   return reactiveData;
 };
 
-export { createReactiveData, getReactData, type IReactiveData };
+type IFormComponentProp = Exclude<IComponentProp, IButtonProp>;
+
+type IFromValue = Record<string, IFormComponentProp["value"]>;
+
+const getValue = () => {
+  const forms = Object.values(reactiveData).filter(
+    ({ componentType }) => componentType !== "button"
+  ) as IFormComponentProp[];
+  const res: IFromValue = {};
+  forms.forEach(({ __name, value }) => {
+    res[__name] = value;
+  });
+  return res;
+};
+
+export {
+  createReactiveData,
+  getReactData,
+  getValue,
+  type IFromValue,
+  type IReactiveData,
+};

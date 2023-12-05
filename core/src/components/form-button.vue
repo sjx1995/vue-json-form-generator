@@ -4,11 +4,10 @@
  * @Date: 2023-11-30 05:33:37
 -->
 <script lang="ts" setup>
-import { ElButton } from "element-plus";
-import { getReactData } from "../component-context";
-import FormItem from "./form-item.vue";
 import type { ButtonProps } from "element-plus";
-import type { IReactiveData } from "../component-context";
+import { ElButton } from "element-plus";
+import { getValue, type IFromValue } from "../component-context";
+import FormItem from "./form-item.vue";
 
 export type IButtonProp = {
   // 自定义属性
@@ -16,7 +15,7 @@ export type IButtonProp = {
   buttonText: string;
   label?: string;
   block?: boolean;
-  onSubmit?: (data: IReactiveData) => void;
+  onSubmit?: (data: IFromValue) => void;
   // Element-plus Button 属性
   disabled?: ButtonProps["disabled"];
   loading?: ButtonProps["loading"];
@@ -39,7 +38,7 @@ const style = {
   <FormItem :label="props.label">
     <ElButton
       :style="style"
-      @click="() => props.onSubmit && props.onSubmit(getReactData())"
+      @click="() => props.onSubmit && props.onSubmit(getValue())"
       :loading="props.loading"
       :disabled="props.disabled"
       :type="props.type"

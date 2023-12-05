@@ -4,19 +4,19 @@
  * @Date: 2023-11-29 07:13:28
 -->
 <script setup lang="ts">
-import { type IFormJSON } from "@packages/generator";
+import { type IFormJSON, type IFromValue } from "@packages/generator";
 
 const formJSON: IFormJSON = {
   username: {
     componentType: "input",
     label: "用户名",
-    defaultValue: "foo",
+    value: "foo",
     type: "text",
   },
   password: {
     componentType: "input",
     label: "密码",
-    defaultValue: "bar",
+    value: "bar",
     type: "password",
     rules: [
       {
@@ -36,7 +36,7 @@ const formJSON: IFormJSON = {
   gender: {
     componentType: "select",
     label: "性别",
-    defaultValue: "0",
+    value: "0",
     options: [
       {
         label: "男",
@@ -51,13 +51,13 @@ const formJSON: IFormJSON = {
   receiveEmail: {
     componentType: "switch",
     label: "接收邮件",
-    defaultValue: true,
+    value: true,
   },
   submit: {
     componentType: "button",
     buttonText: "注册",
     block: true,
-    onSubmit: (data) => {
+    onSubmit: (data: IFromValue) => {
       console.log(data);
     },
   },
