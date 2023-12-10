@@ -9,14 +9,20 @@ import VueDraggable from "vuedraggable";
 import { createInputComponent } from "./input-component";
 import { createSelectComponent } from "./select-component";
 import { createSwitchComponent } from "./switch-component";
+import { createComponent, type IComponentItem } from "./index";
+import { Icon } from "@iconify/vue";
 import { createButtonComponent } from "./button-component";
 
 const components = reactive([
-  createInputComponent(1),
-  createSelectComponent(2),
-  createSwitchComponent(3),
-  createButtonComponent(4),
+  createInputComponent(),
+  createSelectComponent(),
+  createSwitchComponent(),
+  createButtonComponent(),
 ]);
+
+const handleCloneComponent = (element: IComponentItem<unknown>) => {
+  return createComponent(element.name);
+};
 </script>
 
 <template>
@@ -24,12 +30,15 @@ const components = reactive([
     <VueDraggable
       class="dragArea list-group"
       :list="components"
-      :group="{ name: 'people', pull: 'clone', put: false }"
+      :group="{ name: 'components', pull: 'clone', put: false }"
       item-key="name"
+      :sort="false"
+      :clone="handleCloneComponent"
     >
       <template #item="{ element }">
         <div class="material-item">
-          <component :is="element.component" v-bind="element.props" />
+          <Icon :icon="element.icon" />
+          {{ element.title }}
         </div>
       </template>
     </VueDraggable>
@@ -43,5 +52,28 @@ const components = reactive([
   padding: 8px;
   margin: 8px;
   min-width: 240px;
+  .material-item {
+    display: flex;
+    align-items: center;
+    border: 1px solid #eee;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: move;
+    transition: all 0.3s;
+    &:hover {
+      background-color: #eee;
+    }
+    &:active {
+      background-color: #ddd;
+    }
+    &:not(:last-child) {
+      margin-bottom: 8px;
+    }
+    .iconify {
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+    }
+  }
 }
 </style>

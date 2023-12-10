@@ -3,18 +3,20 @@
  * @Author: Sunly
  * @Date: 2023-12-04 15:35:59
  */
-import { FormInput, type IInput } from "@packages/generator";
-import type { IComponentItem } from "./index";
+import { type IInput } from "@packages/generator";
+import { v4 as uuid } from "uuid";
+import { type IComponentItem } from "./index";
 
-const createInputComponent = (id: number): IComponentItem<IInput> => ({
-  component: FormInput,
+const createInputComponent = (): IComponentItem<IInput> => ({
   name: "input",
-  id,
+  title: "输入框",
+  id: uuid(),
+  icon: "vaadin:input",
   props: {
     label: "输入框",
     componentType: "input",
     placeholder: "请输入",
-    disabled: true,
+    disabled: false,
     value: "",
     type: "text",
   },

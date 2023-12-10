@@ -3,16 +3,18 @@
  * @Author: Sunly
  * @Date: 2023-12-04 16:17:32
  */
-import { FormButton, type IButton } from "@packages/generator";
-import type { IComponentItem } from "./index";
+import { type IButton } from "@packages/generator";
+import { v4 as uuid } from "uuid";
+import { type IComponentItem } from "./index";
 
-const createButtonComponent = (id: number): IComponentItem<IButton> => ({
-  component: FormButton,
+const createButtonComponent = (): IComponentItem<IButton> => ({
   name: "button",
-  id,
+  title: "按钮",
+  id: uuid(),
+  icon: "formkit:button",
   props: {
     label: "按钮",
-    disabled: true,
+    disabled: false,
     buttonText: "确定",
     componentType: "button",
   },

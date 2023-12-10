@@ -4,24 +4,18 @@
  * @Date: 2023-12-04 03:50:58
  */
 import { defineStore } from "pinia";
-import type {
-  IFormJSON,
-  IButtonProp,
-  IInputProp,
-  ISelectProp,
-  ISwitchProp,
-} from "@packages/generator";
+import { type IComponents } from "../components/materials";
 
 const useLowCodeStore = defineStore({
   id: "low-code",
   state: () => ({
-    components: [],
+    selected: null as null | IComponents[keyof IComponents],
   }),
-  getters: {
-    //
-  },
+  getters: {},
   actions: {
-    //
+    setSelected(selected: IComponents[keyof IComponents]) {
+      this.selected = selected;
+    },
   },
 });
 

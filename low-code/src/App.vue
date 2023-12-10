@@ -4,10 +4,10 @@
  * @Date: 2023-12-04 03:09:50
 -->
 <script lang="ts" setup>
+import CanvasArea from "./components/canvas/canvas-area.vue";
 import Header from "./components/i-header.vue";
 import ComponentArea from "./components/materials/materials-area.vue";
-import CanvasArea from "./components/canvas-area.vue";
-import ControllerArea from "./components/controller-area.vue";
+import PropertiesArea from "./components/properties/properties-area.vue";
 </script>
 
 <template>
@@ -15,7 +15,7 @@ import ControllerArea from "./components/controller-area.vue";
   <main>
     <ComponentArea />
     <CanvasArea />
-    <ControllerArea />
+    <PropertiesArea />
   </main>
 </template>
 
