@@ -4,13 +4,13 @@
  * @Date: 2023-12-10 13:11:21
 -->
 <script setup lang="ts">
+import { type ButtonProps } from "element-plus";
 import { computed } from "vue";
 import { emitSetProps } from "../../utils/event-emitter";
 import { type IComponents } from "../materials/index";
 import PropertyItemInput from "./common/property-item-input.vue";
-import PropertyItemSwitch from "./common/property-item-switch.vue";
 import PropertyItemSelect from "./common/property-item-select.vue";
-import { type ButtonProps } from "element-plus";
+import PropertyItemSwitch from "./common/property-item-switch.vue";
 
 const props = defineProps<IComponents["button"]>();
 
@@ -37,8 +37,8 @@ const setSelectedProp = <T extends keyof IComponents["button"]["props"]>(
 };
 
 const sizeOptions = [
-  { label: "默认尺寸", value: "default" },
   { label: "大尺寸", value: "large" },
+  { label: "默认尺寸", value: "default" },
   { label: "小尺寸", value: "small" },
 ];
 
