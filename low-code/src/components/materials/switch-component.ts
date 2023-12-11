@@ -17,6 +17,8 @@ const createSwitchComponent = (): IComponentItem<ISwitch> => ({
     disabled: false,
     value: true,
     componentType: "switch",
+    loading: false,
+    size: "default",
   },
 });
 
