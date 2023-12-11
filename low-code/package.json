@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
     "@packages/generator": "workspace:*",
     "element-plus": "^2.4.3",
     "events": "^3.3.0",

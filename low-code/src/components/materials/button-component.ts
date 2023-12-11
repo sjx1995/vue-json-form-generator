@@ -13,10 +13,19 @@ const createButtonComponent = (): IComponentItem<IButton> => ({
   id: uuid(),
   icon: "formkit:button",
   props: {
-    label: "按钮",
+    label: "",
     disabled: false,
     buttonText: "确定",
     componentType: "button",
+    circle: false,
+    block: false,
+    icon: "",
+    loading: false,
+    round: false,
+    size: "default",
+    text: false,
+    type: "primary",
+    plain: false,
   },
 });
 
