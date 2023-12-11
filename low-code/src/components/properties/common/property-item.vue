@@ -27,7 +27,7 @@ defineProps<{
   justify-content: flex-start;
   margin-bottom: 8px;
   .property-item-name {
-    width: 80px;
+    width: 100px;
     margin-right: 8px;
   }
   .property-item-value {

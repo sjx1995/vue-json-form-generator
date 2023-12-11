@@ -19,6 +19,10 @@ const createInputComponent = (): IComponentItem<IInput> => ({
     disabled: false,
     value: "",
     type: "text",
+    maxlength: undefined,
+    minlength: undefined,
+    showWordLimit: false,
+    size: "default",
   },
 });
 

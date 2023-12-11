@@ -23,6 +23,7 @@ export type IInputProp = {
   showWordLimit?: InputProps["showPassword"];
   placeholder?: InputProps["placeholder"];
   rules?: IFormItemRule;
+  size?: InputProps["size"];
 };
 
 const props = defineProps<IInputProp>();
@@ -73,6 +74,7 @@ const value = computed({
       :disabled="props.disabled"
       :show-word-limit="props.showWordLimit"
       :placeholder="placeholder || `请输入${props.label || ''}`"
+      :size="props.size"
     />
   </FormItem>
 </template>

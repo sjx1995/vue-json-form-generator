@@ -38,10 +38,6 @@ const style = computed(() =>
       }
     : null
 );
-
-// const style = {
-//   width: props.block ? "100%" : "",
-// };
 </script>
 
 <template>
