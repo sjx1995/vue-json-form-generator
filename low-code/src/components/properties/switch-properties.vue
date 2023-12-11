@@ -12,10 +12,10 @@ import PropertyItemSwitch from "./common/property-item-switch.vue";
 
 const props = defineProps<IComponents["switch"]>();
 
-const label = computed(() => props.props.label || "");
-const disabled = computed(() => props.props.disabled || false);
 const name = computed(() => props.__name || "");
 const value = computed(() => props.props.value as boolean);
+const label = computed(() => props.props.label || "");
+const disabled = computed(() => props.props.disabled || false);
 
 const setSelectedProp = <T extends keyof IComponents["switch"]["props"]>(
   key: T | "__name",
@@ -32,7 +32,6 @@ const setSelectedProp = <T extends keyof IComponents["switch"]["props"]>(
       :model-value="name"
       @update:model-value="(value: string) => setSelectedProp('__name', value)"
       title="数据键名"
-      type="text"
     />
     <PropertyItemSwitch
       :model-value="value"
@@ -43,7 +42,6 @@ const setSelectedProp = <T extends keyof IComponents["switch"]["props"]>(
       :model-value="label"
       @update:model-value="(value: string) => setSelectedProp('label', value)"
       title="表单名"
-      type="text"
     />
     <PropertyItemSwitch
       :model-value="disabled"
