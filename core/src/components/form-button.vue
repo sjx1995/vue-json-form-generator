@@ -25,6 +25,7 @@ export type IButtonProp = {
   round?: ButtonProps["round"];
   circle?: ButtonProps["circle"];
   icon?: ButtonProps["icon"];
+  plain?: ButtonProps["plain"];
 };
 
 const props = defineProps<IButtonProp>();
@@ -47,6 +48,7 @@ const style = {
       :round="props.round"
       :circle="props.circle"
       :icon="props.icon"
+      :plain="props.plain"
     >
       {{ props.buttonText || "确定" }}
     </ElButton>
