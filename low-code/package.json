@@ -11,6 +11,7 @@
   "dependencies": {
     "@packages/generator": "workspace:*",
     "element-plus": "^2.4.3",
+    "events": "^3.3.0",
     "pinia": "^2.1.7",
     "uuid": "^9.0.1",
     "vue": "^3.3.4",

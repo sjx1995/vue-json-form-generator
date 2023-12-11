@@ -21,15 +21,19 @@ import { createSwitchComponent } from "./switch-component";
 type IComponents = {
   input: IComponentItem<IInput> & {
     component: typeof FormInput;
+    __name: string;
   };
   button: IComponentItem<IButton> & {
     component: typeof FormButton;
+    __name: string;
   };
   select: IComponentItem<ISelect> & {
     component: typeof FormSelect;
+    __name: string;
   };
   switch: IComponentItem<ISwitch> & {
     component: typeof FormSwitch;
+    __name: string;
   };
 };
 
@@ -40,21 +44,25 @@ const createComponent = <T extends keyof IComponents>(
     return {
       ...createButtonComponent(),
       component: FormButton,
+      __name: "",
     } as IComponents[T];
   } else if (name === "input") {
     return {
       ...createInputComponent(),
       component: FormInput,
+      __name: "",
     } as IComponents[T];
   } else if (name === "select") {
     return {
       ...createSelectComponent(),
       component: FormSelect,
+      __name: "",
     } as IComponents[T];
   } else if (name === "switch") {
     return {
       ...createSwitchComponent(),
       component: FormSwitch,
+      __name: "",
     } as IComponents[T];
   }
   return null;

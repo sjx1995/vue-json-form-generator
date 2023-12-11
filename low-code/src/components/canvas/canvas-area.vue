@@ -4,18 +4,33 @@
  * @Date: 2023-12-04 03:39:42
 -->
 <script lang="ts" setup>
+import { reactive } from "vue";
 import VueDraggable from "vuedraggable";
-import { shallowReactive } from "vue";
-import { useLowCodeStore } from "../../store/low-code-store";
+import { emitSetSelected, onSetProps } from "../../utils/event-emitter";
+import { type IComponents } from "../materials";
 
-const lowCodeStore = useLowCodeStore();
+// 同步属性
+onSetProps((id, key, value) => {
+  components.forEach((component) => {
+    if (component.id === id) {
+      if (key === "__name") {
+        component.__name = value as string;
+      } else {
+        const props = component.props;
+        console.log("find component", props);
+        if (props && key in props && props[key] !== value) {
+          (props[key] as typeof value) = value;
+        }
+      }
+    }
+  });
+});
 
-const components = shallowReactive([]);
-
+const components = reactive<IComponents[keyof IComponents][]>([]);
 const handleAdd = ({ newIndex }: { newIndex: number }) => {
   const element = components[newIndex];
   if (element) {
-    lowCodeStore.setSelected(element);
+    emitSetSelected(element);
   }
 };
 </script>
@@ -54,4 +69,3 @@ const handleAdd = ({ newIndex }: { newIndex: number }) => {
   }
 }
 </style>
-../../store/low-code-store

@@ -21,7 +21,12 @@ const components = reactive([
 ]);
 
 const handleCloneComponent = (element: IComponentItem<unknown>) => {
-  return createComponent(element.name);
+  const newComponent = createComponent(element.name);
+  if (newComponent) {
+    newComponent.__name = newComponent.id;
+    return newComponent;
+  }
+  return null;
 };
 </script>
 
@@ -51,7 +56,7 @@ const handleCloneComponent = (element: IComponentItem<unknown>) => {
   border-radius: 4px;
   padding: 8px;
   margin: 8px;
-  min-width: 240px;
+  min-width: 200px;
   .material-item {
     display: flex;
     align-items: center;

@@ -4,45 +4,44 @@
  * @Date: 2023-12-04 03:41:46
 -->
 <script lang="ts" setup>
-import { shallowRef, watch, type Component } from "vue";
-import { useLowCodeStore } from "../../store/low-code-store";
-import { type IComponents } from "../materials";
+import { shallowRef, type Component } from "vue";
 import ButtonProperties from "./button-properties.vue";
 import InputProperties from "./input-properties.vue";
 import NonSelectProperties from "./non-select-properties.vue";
 import SelectProperties from "./select-properties.vue";
 import SwitchProperties from "./switch-properties.vue";
-
-const lowCodeStore = useLowCodeStore();
+import { onSetSelected } from "../../utils/event-emitter";
+import { IComponents } from "../materials";
 
 const selectedComponent = shallowRef<Component>(NonSelectProperties);
-const selectedProps = shallowRef<IComponents[keyof IComponents] | null>(null);
-watch(
-  () => lowCodeStore.selected,
-  (selected) => {
-    if (selected?.name === "input") {
-      selectedComponent.value = InputProperties;
-      selectedProps.value = selected;
-    } else if (selected?.name === "button") {
-      selectedComponent.value = ButtonProperties;
-      selectedProps.value = selected;
-    } else if (selected?.name === "select") {
-      selectedComponent.value = SelectProperties;
-      selectedProps.value = selected;
-    } else if (selected?.name === "switch") {
-      selectedComponent.value = SwitchProperties;
-      selectedProps.value = selected;
-    } else {
-      selectedComponent.value = NonSelectProperties;
-      selectedProps.value = null;
-    }
+const selectedProp = shallowRef<IComponents[keyof IComponents] | null>(null);
+onSetSelected((selected) => {
+  if (selected?.name === "input") {
+    selectedComponent.value = InputProperties;
+    selectedProp.value = selected;
+  } else if (selected?.name === "button") {
+    selectedComponent.value = ButtonProperties;
+    selectedProp.value = selected;
+  } else if (selected?.name === "select") {
+    selectedComponent.value = SelectProperties;
+    selectedProp.value = selected;
+  } else if (selected?.name === "switch") {
+    selectedComponent.value = SwitchProperties;
+    selectedProp.value = selected;
+  } else {
+    selectedComponent.value = NonSelectProperties;
+    selectedProp.value = null;
   }
-);
+});
 </script>
 
 <template>
   <div class="controller-area">
-    <component :is="selectedComponent" v-bind="selectedProps" />
+    <component
+      :is="selectedComponent"
+      :key="selectedProp?.id"
+      v-bind="selectedProp"
+    />
   </div>
 </template>
 
@@ -50,8 +49,9 @@ watch(
 .controller-area {
   border: 1px solid #eee;
   border-radius: 4px;
-  padding: 8px;
+  padding: 8px 16px;
   margin: 8px;
-  min-width: 240px;
+  min-width: 300px;
+  box-sizing: border-box;
 }
 </style>
