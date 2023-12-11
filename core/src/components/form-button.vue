@@ -8,6 +8,7 @@ import type { ButtonProps } from "element-plus";
 import { ElButton } from "element-plus";
 import { getValue, type IFromValue } from "../component-context";
 import FormItem from "./form-item.vue";
+import { computed } from "vue";
 
 export type IButtonProp = {
   // 自定义属性
@@ -30,9 +31,17 @@ export type IButtonProp = {
 
 const props = defineProps<IButtonProp>();
 
-const style = {
-  width: props.block ? "100%" : "",
-};
+const style = computed(() =>
+  props.block
+    ? {
+        width: "100%",
+      }
+    : null
+);
+
+// const style = {
+//   width: props.block ? "100%" : "",
+// };
 </script>
 
 <template>
